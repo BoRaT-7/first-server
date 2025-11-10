@@ -1,22 +1,25 @@
-const express = require("express");
+const express = require('express');
+const cors = require('cors');
 
 const app = express();
+const port = process.env.PORT || 5000;
 
-app.get("/", (req, res) => {
-  res.send("✅ Express server is running successfully yes!");
+app.use(cors());
+
+const users = [
+  { id: 1, name: 'Sabina', email: 'sabina@gmail.com' },
+  { id: 2, name: 'Saba', email: 'saba@gmail.com' },
+  { id: 3, name: 'Sad', email: 'sad@gmail.com' },
+];
+
+app.get('/user', (req, res) => {
+  res.send(users);
 });
 
-const PORT = 5000;
+app.get('/', (req, res) => {
+  res.send('User Management server is running');
+});
 
-const user = [
-  {id:1, name:'Sabana',email:'sabana@gmail.com'},
-  {id:2, name:'Sabina',email:'sabina@gmail.com'},
-  {id:1, name:'Sammi',email:'sammi@gmail.com'},
-]
-app.get('/user',(req,res) =>{
-  res.send(user);
-})
-
-app.listen(PORT, () => {
-  console.log(`🚀 Server is running at http://localhost:${PORT}`);
+app.listen(port, () => {
+  console.log(`Server is running on PORT: ${port}`);
 });
